@@ -1,0 +1,17 @@
+
+This C++ code retrieves and displays memory and CPU usage information on Linux systems.
+
+Compile and Run
+Compile: `g++ -o system_monitor system_monitor.cpp`
+Run: `./system_monitor`
+
+
+
+Code Configurations
+.Sleep duration: 1 second ( adjustable in `usleep(1000000)` )
+.Memory units: MB ( adjustable in division by 1024 )
+.CPU usage calculation: based on idle and non-idle time differences
+
+
+.This code requires Linux-specific files and may not work on other operating systems.
+.The CPU usage calculation assumes a single CPU core. For multi-core systems, the calculation may need adjustments.
