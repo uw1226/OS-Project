@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 #include <map>
-#include <unistd.h> // for usleep
+#include <unistd.h> 
 
 using namespace std;
 
@@ -19,7 +19,7 @@ map<string, long long> getMemInfo() {
         long long value;
         string unit;
         ss >> key >> value >> unit;
-        // Remove the colon from the key
+        
         key = key.substr(0, key.length() - 1);
         memInfoMap[key] = value;
     }
@@ -45,7 +45,7 @@ CpuData getCpuData() {
     CpuData data;
     ifstream stat_file("/proc/stat");
     string line;
-    getline(stat_file, line); // Read the first line which starts with "cpu "
+    getline(stat_file, line); 
 
     stringstream ss(line);
     string cpu_label;
@@ -54,16 +54,16 @@ CpuData getCpuData() {
 }
 
 int main() {
-    // Memory Information
+
     map<string, long long> memInfo = getMemInfo();
 
     long long memTotal = memInfo["MemTotal"];
     long long memFree = memInfo["MemFree"];
-    long long memAvailable = memInfo["MemAvailable"]; // Available memory is usually a better indicator of usable memory
+    long long memAvailable = memInfo["MemAvailable"]; 
     long long swapTotal = memInfo["SwapTotal"];
     long long swapFree = memInfo["SwapFree"];
 
-    long long memUsed = memTotal - memAvailable; // Using MemAvailable for a more accurate "used" calculation
+    long long memUsed = memTotal - memAvailable; 
     long long swapUsed = swapTotal - swapFree;
 
     cout << "Memory Information:" << endl;
@@ -75,7 +75,7 @@ int main() {
     cout << "  Free Swap: " << swapFree / 1024 << " MB" << endl;
     cout << endl;
 
-    // CPU Usage
+
     CpuData prevData = getCpuData();
     usleep(1000000); // Sleep for 1 second (1,000,000 microseconds)
     CpuData currentData = getCpuData();
